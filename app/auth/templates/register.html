@@ -21,16 +21,6 @@
 
         </div>
     </div>
-    <style>
-        .invalid {
-            color: red;
-        }
-
-        .valid {
-            color: green;
-        }
-    </style>
-
 
     <script>
         var passwordField = document.getElementById("password");
@@ -80,7 +70,6 @@
             progress_bar.style.width = width_value;
 
             var lowerCaseLetters = /[a-z]/g;
-            let lw = 0;
             if(passwordField.value.match(lowerCaseLetters)) {
                 document.getElementById("lowercase").innerHTML = "has lower case letter";
                 width += 25;
