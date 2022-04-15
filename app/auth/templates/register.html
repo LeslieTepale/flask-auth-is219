@@ -32,22 +32,29 @@
         var passwordField = document.getElementById("password");
         var letter = document.getElementById("letter");
         var lowerCase = 0;
+        var upperCase = 0;
+        var aNumber = 0;
+        var specialChar = 0;
+        var fLen = 0;
 
         passwordField.onfocus = function () {
             var message = document.getElementById("message");
             message.style.display = "block";
-            message.style.border = "2px solid";
+            message.style.border = "1px solid";
         }
 
         passwordField.onkeyup = function () {
             var progress_bar = document.getElementById("p-bar");
+            var width = 0;
+            var width_value = "";
             // Validate lowercase letters
+            /*
             let lowerCaseLetters = /[a-z]/g;
             let new_width_value;
             if(lowerCase === 0) {
                 let p_bar_width_string = progress_bar.style.width;
                 let width_current_value = parseInt(p_bar_width_string.substring(0, p_bar_width_string.length - 1));
-                width_current_value = width_current_value + 33;
+                width_current_value = width_current_value + 20;
                 let width_string_new_value = width_current_value.toString();
                 new_width_value = width_string_new_value.concat("%");
             } else {
@@ -60,9 +67,56 @@
                 progress_bar.style.width = "0%";
                 lowerCase = 0;
             }
+            var upperCaseLetters = /[A-Z]/g;
+            if(passwordField.value.match(upperCaseLetters)) {
+                progress_bar.style.width = new_width_value;
+                upperCase = 1;
+            } else {
+                progress_bar.style.width = "0%";
+                upperCase = 0;
+            }
+             */
+            var lowerCaseLetters = /[a-z]/g;
+            if(passwordField.value.match(lowerCaseLetters)) {
+                width += 20;
+            } else {
+                width -= 20;
+            }
+            width_value = width.toString() + "%";
+            progress_bar.style.width = width_value;
+            /*
+            // Validate capital letters
+            var upperCaseLetters = /[A-Z]/g;
+            if(myInput.value.match(upperCaseLetters)) {
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+            } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+            }
+            // Validate numbers
+            var numbers = /[0-9]/g;
+            if(myInput.value.match(numbers)) {
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+            } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+            }
+            // Validate length
+            if(myInput.value.length >= 8) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+            } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+            }
+
+             */
+            if(progress_bar.style.width === "100%"){
+                progress_bar.style.backgroundColor = "green";
+            }
         }
-
-
     </script>
 
 {% endblock %}
