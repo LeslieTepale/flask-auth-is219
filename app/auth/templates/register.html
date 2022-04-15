@@ -15,8 +15,8 @@
                 <p id = "lowercase"> </p>
                 <p id = "uppercase"> </p>
                 <p id = "number"> </p>
-                <p id = "special character"> </p>
                 <p id = "length"> </p>
+                <p id = "special character"> </p>
             </div>
 
         </div>
@@ -36,10 +36,6 @@
         var passwordField = document.getElementById("password");
         var letter = document.getElementById("letter");
         var lowerCase = 0;
-        var upperCase = 0;
-        var aNumber = 0;
-        var specialChar = 0;
-        var fLen = 0;
 
         passwordField.onfocus = function () {
             var message = document.getElementById("message");
@@ -49,7 +45,7 @@
 
         passwordField.onkeyup = function () {
             var progress_bar = document.getElementById("p-bar");
-            let width = 0;
+            var width = 0;
             var width_value = "";
             // Validate lowercase letters
             /*
@@ -80,52 +76,67 @@
                 upperCase = 0;
             }
              */
-            var lowerCaseLetters = /[a-z]/g;
-            if(passwordField.value.match(lowerCaseLetters)) {
-                width += 20;
-                document.getElementById("lowercase").innerHTML = "has lower case letter";
-            } else {
-                document.getElementById("lowercase").innerHTML = "";
-                if(width > 0) width -= 20;
-            }
             width_value = width.toString() + "%";
             progress_bar.style.width = width_value;
+
+            var lowerCaseLetters = /[a-z]/g;
+            let lw = 0;
+            if(passwordField.value.match(lowerCaseLetters)) {
+                document.getElementById("lowercase").innerHTML = "has lower case letter";
+                width += 25;
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
+            } else {
+                document.getElementById("lowercase").innerHTML = "" ;
+                if(width > 0) {width -= 25;}
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
+            }
 
             // Validate capital letters
             var upperCaseLetters = /[A-Z]/g;
             if(passwordField.value.match(upperCaseLetters)) {
-                document.getElementById("uppercase").innerHTML = "has upper case letter";
-                width += 20;
+                document.getElementById("uppercase").innerHTML = "has upper case letter" ;
+                width += 25;
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
             } else {
                 document.getElementById("uppercase").innerHTML = "";
-                if(width > 0) width -= 20;
+                if(width > 0) width -= 25;
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
             }
-            width_value = width.toString() + "%";
-            progress_bar.style.width = width_value;
 
-            /*
             // Validate numbers
             var numbers = /[0-9]/g;
-            if(myInput.value.match(numbers)) {
-                number.classList.remove("invalid");
-                number.classList.add("valid");
+            if(passwordField.value.match(numbers)) {
+                document.getElementById("number").innerHTML = "has number";
+                width += 25;
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
             } else {
-                number.classList.remove("valid");
-                number.classList.add("invalid");
-            }
-            // Validate length
-            if(myInput.value.length >= 8) {
-                length.classList.remove("invalid");
-                length.classList.add("valid");
-            } else {
-                length.classList.remove("valid");
-                length.classList.add("invalid");
+                document.getElementById("number").innerHTML = "";
+                if(width > 0) width -= 25;
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
             }
 
-             */
+            // Validate length
+            if(passwordField.value.length >= 8) {
+                document.getElementById("length").innerHTML = "has a minimum length of 8";
+                width += 25;
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
+            } else {
+                document.getElementById("length").innerHTML = "";
+                if(width > 0) width -= 25;
+                width_value = width.toString() + "%";
+                progress_bar.style.width = width_value;
+            }
+
             if(progress_bar.style.width === "100%"){
                 progress_bar.style.backgroundColor = "green";
-            }
+            } else progress_bar.style.backgroundColor = "tomato";
         }
     </script>
 
